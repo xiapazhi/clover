@@ -1,0 +1,58 @@
+{
+  "name": "clover",
+  "version": "1.0.0",
+  "description": "仿4chan的简单匿名论坛",
+  "dependencies": {
+    "egg": "^2.10.0",
+    "egg-scripts": "^2.5.0",
+    "egg-sequelize": "^4.0.2",
+    "egg-socket.io": "^4.1.6",
+    "moment": "^2.29.1",
+    "path": "^0.12.7",
+    "pg": "^8.7.1",
+    "ppfun-captcha": "^1.6.5",
+    "sequelize-automate-freesun": "^1.2.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.7",
+    "egg-mock": "^3.19.2",
+    "eslint": "^4.18.1",
+    "eslint-config-egg": "^7.0.0",
+    "factory-girl": "^5.0.2",
+    "sequelize-cli": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "debug": "egg-bin debug --port 7002 --sticky",
+    "start": "egg-scripts start --port 7002 --sticky --daemon --title=egg-server-clover-api",
+    "stop": "egg-scripts stop --port 7002 --title=egg-server-clover-api",
+    "autod": "autod",
+    "lint": "eslint .",
+    "test": "egg-bin test",
+    "cov": "egg-bin cov",
+    "ci": "npm run lint && NODE_ENV=test npx sequelize db:migrate && npm run cov",
+    "seq": "sequelize-automate -c ./config/sequelize-automate.config.js"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "eslintIgnore": [
+    "coverage",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "author": "anonymity",
+  "private": true
+}

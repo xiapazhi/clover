@@ -1,0 +1,9 @@
+site/.env.development
+server/yarn.lock
+server/config/config.local.js
+site/yarn.lock
+server/egg-schedule.log
+server/app/public/content/
+server/config/config.prod.js
+site/.env.production
+site/package-lock.json
