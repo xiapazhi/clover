@@ -1,5 +1,7 @@
 # clover
 
+> node v16
+
 ## Project setup
 ```
 npm install
