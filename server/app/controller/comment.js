@@ -53,7 +53,7 @@ class Comment extends Controller {
                 if (moment().isAfter(moment(verificationData.expires))) {
                     errMsg = `验证码超时，点击更新~`
                     throw errMsg
-                } else if (verification.verificationCode !== verificationData.text) {
+                } else if ((verification.verificationCode || '').toUpperCase() !== verificationData.text) {
                     errMsg = `验证码错误~`
                     throw errMsg
                 } else {

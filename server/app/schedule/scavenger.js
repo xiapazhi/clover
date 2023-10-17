@@ -22,14 +22,29 @@ class Scavenger extends Subscription {
         try {
             const { model, logger, app } = this.ctx;
 
-            // 清楚缓存的、判断频率的 ip 数据
+            // 清除缓存的、判断频率的 ip 数据
             this.ctx.app.captchaData = {}
             this.ctx.app.ipRateData = {}
             this.ctx.app.ipMannerToday = {}
 
+            const totalCount = await model.Content.count()
+            if (totalCount < 24) {
+                return
+            }
+
             // 判断每篇内容的生命周期 
             // do 将内容的剩余时间展示在前端，倒计时  xx小时xx秒
-            // 每个文章默认7d，1 个评论 + 3d; 1 个 like + 2d，1 个 disgust - 1d 
+            /**
+             * 每个文章默认7d
+             * 1 个评论 + commentAddDay d;
+             * 1 个 like + likeAddDay d;
+             * 1 个 disgust - disgustSubtractDay d
+             */
+
+            const defaultExistDay = 7
+            const likeAddDay = 3
+            const commentAddDay = 5
+            const disgustSubtractDay = 1
 
             let hasContent = true
             let times = 0
@@ -52,7 +67,17 @@ class Scavenger extends Subscription {
                 })
 
                 for (let c of contentRes) {
-                    let overTime = moment(c.publishTime).add(7 + c.like * 2 + parseInt(c.dataValues.commentCount) * 3, 'd').subtract(c.disgust, 'd')
+                    let overTime = moment(c.publishTime)
+                        .add(
+                            defaultExistDay
+                            + c.like * likeAddDay
+                            + parseInt(c.dataValues.commentCount) * commentAddDay,
+                            'd'
+                        )
+                        .subtract(
+                            c.disgust * disgustSubtractDay,
+                            'd'
+                        )
                     if (moment().isAfter(overTime)) {
                         // 此刻超出结束时间，进入删帖流程
 

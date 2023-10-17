@@ -25,18 +25,17 @@ class Verification extends Controller {
                 height: 100,
                 fontSize: 116
             });
-            console.log(captcha);
             const uuid = uuidv4()
             if (app.captchaData) {
                 app.captchaData[uuid] = {
-                    text: captcha.text,
-                    expires: moment().add(5, 'minute').format()
+                    text: captcha.text.toUpperCase(),
+                    expires: moment().add(30, 'minute').format()
                 }
             } else {
                 app.captchaData = {
                     [uuid]: {
-                        text: captcha.text,
-                        expires: moment().add(5, 'minute').format()
+                        text: captcha.text.toUpperCase(),
+                        expires: moment().add(30, 'minute').format()
                     }
                 }
             }

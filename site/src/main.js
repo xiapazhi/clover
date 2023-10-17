@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import moment from 'moment'
 import VueSocketIO from 'vue-socket.io'
 import 'moment/locale/zh-cn';
+import '@mdi/font/css/materialdesignicons.css';
 moment.locale('zh-cn');
 
 Vue.config.productionTip = false

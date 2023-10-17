@@ -25,7 +25,7 @@ class Content extends Controller {
                 if (moment().isAfter(moment(verificationData.expires))) {
                     // 超时
                     ctx.status = 221;
-                } else if (verification.verificationCode !== verificationData.text) {
+                } else if ((verification.verificationCode || '').toUpperCase() !== verificationData.text) {
                     // 验证码错误
                     ctx.status = 222;
                 } else {
@@ -80,7 +80,8 @@ class Content extends Controller {
                 let day = moment().format('YYYYMMDD')
                 let target = 'app/public/content/' + day;
                 if (!await fs.existsSync(target)) {
-                    await fs.mkdirSync(target)
+                    // await fs.mkdirSync(target)
+                    await ctx.service.utils.makeDir(target)
                 }
                 let suffix = filename.split('.').pop()
                 let fileName = uuidv4() + '.' + suffix
@@ -123,13 +124,13 @@ class Content extends Controller {
             if (app.captchaData) {
                 app.captchaData[uuid] = {
                     text: captcha.text,
-                    expires: moment().add(5, 'minute').format()
+                    expires: moment().add(30, 'minute').format()
                 }
             } else {
                 app.captchaData = {
                     [uuid]: {
-                        text: captcha.text,
-                        expires: moment().add(5, 'minute').format()
+                        text: captcha.text.toUpperCase(),
+                        expires: moment().add(30, 'minute').format()
                     }
                 }
             }

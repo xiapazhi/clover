@@ -19,6 +19,7 @@
     "xss": "^1.0.10"
   },
   "devDependencies": {
+    "@mdi/font": "^7.3.67",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
