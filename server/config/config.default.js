@@ -21,7 +21,7 @@ module.exports = (appInfo = {}) => {
     config.io = {
         init: {}, // passed to engine.io
         namespace: {
-            '/': {
+            '/clover': {
                 // connectionMiddleware: ['connection'],
                 connectionMiddleware: [],
                 packetMiddleware: [],

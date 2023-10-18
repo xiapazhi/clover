@@ -79,7 +79,7 @@ class Comment extends Controller {
                     }
                     // 记录结束
 
-                    const nsp = app.io.of('/');
+                    const nsp = app.io.of('/clover');
                     nsp.server.emit('commentUpdate', {
                         contentId: contentId,
                     });

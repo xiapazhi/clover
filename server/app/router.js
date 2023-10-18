@@ -18,5 +18,5 @@ module.exports = app => {
     router.get('/verificationCode', verification.generateVerificationCode);
 
     // socket.io
-    io.of('/').route('test_ping', io.controller.default.ping);
+    io.of('/clover').route('test_ping', io.controller.default.ping);
 };

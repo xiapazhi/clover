@@ -247,7 +247,7 @@ class Content extends Controller {
                     })
 
                     // 集体发送更新 犇
-                    const nsp = app.io.of('/');
+                    const nsp = app.io.of('/clover');
                     nsp.server.emit('mannerUpdate', nextRes.dataValues);
 
                     ctx.status = 200;

@@ -12,6 +12,10 @@ Vue.config.productionTip = false
 Vue.use(new VueSocketIO({
     debug: true,
     connection: process.env.VUE_APP_WS_HOST, // socket 服务器所在地址
+    options: {
+        // path: '/clover',
+        transports: ["websocket"]
+    }
 }))
 
 new Vue({
